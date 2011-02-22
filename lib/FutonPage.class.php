@@ -50,15 +50,15 @@ Class FutonPage {
 		//elseif(isset($this->id))
 	}
 
-	function install() {
-		if(!FutonCollection::exists('futon_pages')) {
+	static function install() {
+		//if(!FutonCollection::exists('futon_pages')) {
 			$collection = new FutonCollection('futon_pages');
-			error_log(print_r($collection,true));
+			error_log('=========COLLECTION=========\n'.print_r($collection,true));
 			$collection->add_field('route')->add_field('title')->add_field('meta')->add_field('layout')->add_field('styles')->add_field('javascripts')->add_field('widgets')->add_validation('has_route', 'has_title')->commit();
 			$view = new FutonView('pages_by_route');
 			$settings = new FutonSettings();
 			$view->collection('futon_pages')->add_field('route')->build();
-		}
+		//}
 	}
 
 	function view() {

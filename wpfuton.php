@@ -26,6 +26,9 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 require_once('lib/FutonCore.class.php');
 
 function init(){
+	error_log("==========================");
+		FutonPage::install();
+	error_log("==========================");
 	if($_GLOBALS['already'] == false) {
 		global $futon;
 		$futon->settings = new FutonSettings();
@@ -43,8 +46,6 @@ function init(){
 		$_GLOBALS['already'] = true;
 		error_log('Im Awesome :: '.$futon->settings->set('the_answer', '42')->save()->get('the_answer'));
 
-		$page = new FutonPage();
-		$page->install();
 		//$page->route('/store/is/closed/')->title('My Page')->id()->save();
 	}
 	return false;

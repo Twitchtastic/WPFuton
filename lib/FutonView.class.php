@@ -9,14 +9,15 @@ Class FutonView {
 	var $name;
 	var $collection;
 	var $function;
-	var $fields = array();
+	var $fields;
 
 	function FutonView($name) {
 		global $wpdb;
 		$this->name = $name;
 		if($view = $wpdb->get_row("SELECT * FROM {$wpdb->prefix}futon_views WHERE name = '{$name}'", OBJECT)) {
-			$this->fields = json_decode($view->fields);
+			$this->fields = (object)json_decode($view->fields);
 			$this->collection = $view->collection;
+			error_log(print_r($fields,true));
 			$this->table = $wpdb->prefix.'futon_view_'.$this->collection.'_by_'.implode("_and_", $this->field_names());
 			$this->function = 'find_'.$this->collection.'_by_'.implode("_", $this->field_names());
 			$this->saved = true;
